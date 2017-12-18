@@ -18,7 +18,9 @@ gitlab:
     - TZ=Asia/Tokyo
     - GITLAB_TIMEZONE=Tokyo
 
-    - GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alphanumeric-string
+    - GITLAB_SECRETS_OTP_KEY_BASE=tKg7dMMwbMctLnNbdCjqVRtXWn7RPNRvhrVFWVz7FhmzjjsJgW4JLnPhs7zMgkPJ
+    - GITLAB_SECRETS_DB_KEY_BASE=XXWJWbrxXCCjbvdRK9XTnmqHsvNhpwbqcnXbCVzrvRzKPRkv9W4CFWnpvrrMcdR4
+    - GITLAB_SECRETS_SECRET_KEY_BASE=KNJ7PfVLkjhmPWwvMHJKTXdtwpfRkKWTdTjvdxvH39Tk3JKWrVfgLL3Tx7XwMVjT
 
     - GITLAB_HOST=
     - GITLAB_PORT=
@@ -85,7 +87,7 @@ redmine:
 
     - REDMINE_CONCURRENT_UPLOADS=2
 
-    - REDMINE_BACKUP_SCHEDULE=
+    - REDMINE_BACKUP_SCHEDULE=daily
     - REDMINE_BACKUP_EXPIRY=
     - REDMINE_BACKUP_TIME=
 
@@ -123,3 +125,4 @@ proxy:
     - jenkins:jenkins
   ports:
     - "80:80"
+    
