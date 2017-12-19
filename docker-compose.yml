@@ -7,6 +7,7 @@ gitlab-mysql:
     - DB_NAME=gitlabhq_production
   volumes:
     - ./docker/gitlab/mysql:/var/lib/mysql
+    - ./docker/gitlab/logs/mysql:/var/log/mysql
 gitlab:
   restart: always
   image: sameersbn/gitlab:10.2.2
@@ -69,6 +70,7 @@ redmine-mysql:
     - DB_NAME=redmine_production
   volumes:
     - ./docker/redmine/mysql:/var/lib/mysql
+    - ./docker/redmine/logs/mysql:/var/log/mysql
 redmine:
   restart: always
   image: sameersbn/redmine:3.4.2
@@ -91,13 +93,13 @@ redmine:
     - REDMINE_BACKUP_EXPIRY=
     - REDMINE_BACKUP_TIME=
 
-    - SMTP_ENABLED=false
+    - SMTP_ENABLED=true
     - SMTP_METHOD=smtp
-    - SMTP_DOMAIN=www.example.com
-    - SMTP_HOST=smtp.gmail.com
+    - SMTP_DOMAIN=mailsv.itec.hankyu-hanshin.co.jp
+    - SMTP_HOST=mailsv.itec.hankyu-hanshin.co.jp
     - SMTP_PORT=587
-    - SMTP_USER=mailer@example.com
-    - SMTP_PASS=password
+    - SMTP_USER=om7004
+    - SMTP_PASS=w29zb*jg
     - SMTP_STARTTLS=true
     - SMTP_AUTHENTICATION=:login
 
@@ -110,6 +112,7 @@ redmine:
     - IMAP_INTERVAL=30
   volumes:
     - ./docker/redmine/redmine:/home/redmine/data
+    - ./docker/redmine/logs/redmine:/home/redmine/redmine/log
 jenkins:
   restart: always
   image: jenkins:latest
