@@ -1,16 +1,17 @@
 gitlab-mysql:
   restart: always
-  image: sameersbn/mysql:latest
+  image: mysql:8.0.3
   environment:
-    - DB_USER=gitlab
-    - DB_PASS=password
-    - DB_NAME=gitlabhq_production
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=gitlabhq_production
+    - MYSQL_USER=gitlab
+    - MYSQL_PASSWORD=gitlab
   volumes:
     - ./docker/gitlab/mysql:/var/lib/mysql
     - ./docker/gitlab/logs/mysql:/var/log/mysql
 gitlab:
   restart: always
-  image: sameersbn/gitlab:10.2.2
+  image: sameersbn/gitlab:10.2.5
   links:
     - gitlab-redis:redisio
     - gitlab-mysql:mysql
@@ -38,12 +39,12 @@ gitlab:
     - GITLAB_BACKUP_SCHEDULE=daily
     - GITLAB_BACKUP_TIME=01:00
 
-    - SMTP_ENABLED=false
-    - SMTP_DOMAIN=www.example.com
-    - SMTP_HOST=smtp.gmail.com
+    - SMTP_ENABLED=true
+    - SMTP_DOMAIN=mailsv.itec.hankyu-hanshin.co.jp
+    - SMTP_HOST=mailsv.itec.hankyu-hanshin.co.jp
     - SMTP_PORT=587
-    - SMTP_USER=mailer@example.com
-    - SMTP_PASS=password
+    - SMTP_USER=om7004
+    - SMTP_PASS=w29zb*jg
     - SMTP_STARTTLS=true
     - SMTP_AUTHENTICATION=login
 
@@ -58,16 +59,19 @@ gitlab:
     - ./docker/gitlab/gitlab:/home/git/data
 gitlab-redis:
   restart: always
-  image: sameersbn/redis:latest
+  image: redis:3.2.11
+  expose:
+    - "6379"
   volumes:
     - ./docker/gitlab/redis:/var/lib/redis
 redmine-mysql:
   restart: always
-  image: sameersbn/mysql:latest
+  image: mysql:8.0.3
   environment:
-    - DB_USER=redmine
-    - DB_PASS=password
-    - DB_NAME=redmine_production
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=redmine_production
+    - MYSQL_USER=redmine
+    - MYSQL_PASSWORD=redmine
   volumes:
     - ./docker/redmine/mysql:/var/lib/mysql
     - ./docker/redmine/logs/mysql:/var/log/mysql
@@ -115,7 +119,7 @@ redmine:
     - ./docker/redmine/logs/redmine:/home/redmine/redmine/log
 jenkins:
   restart: always
-  image: jenkins:latest
+  image: jenkins:2.60.3
   environment:
     - JENKINS_OPTS=--prefix=/jenkins
   volumes:
@@ -128,4 +132,3 @@ proxy:
     - jenkins:jenkins
   ports:
     - "80:80"
-    
