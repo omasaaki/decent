@@ -136,6 +136,13 @@ https://github.com/two-pack/redmine_xlsx_format_issue_exporter
     ...
     bundle install --without test
 
+##### redmine_workflow_enhancements
+
+https://github.com/dr-itz/redmine_workflow_enhancements
+
+    cd ./docker/redmine/redmine/plugins
+    git clone https://github.com/dr-itz/redmine_workflow_enhancements.git
+
 #### themes
 
 ##### Redmine A1 theme
