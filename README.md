@@ -23,7 +23,7 @@ if the gem installation fails after adding a new plugin, please retry after remo
     docker exec -it devenv_redmine_1 bash
     cd /home/redmine/redmine
     gem install rake
-    rake --trace db:migrate RAILS_ENV=production
+    bundle exec rake --trace db:migrate RAILS_ENV=production
 
 #### uninstalling plugins
 
